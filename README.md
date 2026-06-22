@@ -59,6 +59,15 @@ Se eligieron dos familias tipográficas con criterios de legibilidad y coherenci
 | **Títulos** (H1, H2, H3) | **Playfair Display** | Serif | Elegante y clásica. Evoca lo campestre y la naturaleza, aportando personalidad a los encabezados. |
 | **Cuerpo de texto** | **Montserrat** | Sans-serif | Limpia y moderna. Asegura una lectura perfecta en párrafos largos y tamaños pequeños. |
 
+### Detalles Cottagecore y Texturas (Tactilidad)
+
+Para profundizar la inmersión del usuario y evocar una sensación física y artesanal (táctil), se diseñaron los siguientes elementos decorativos mediante CSS3 y SVG:
+
+-   **Textura de Lino orgánica**: Aplicada como fondo en las secciones principales ("Nuestra Historia", "La Quinta", "Servicios" y "Contacto") combinando un color base cálido y una trama de lino fino (`textura-lino.png`) atenuada con opacidad para no comprometer la legibilidad.
+-   **Ventanas Arqueadas y Enredaderas (La Quinta)**: Las tarjetas se transformaron en arcos simétricos de medio punto enmarcados por una **enredadera trepadora dibujada en SVG** (`.card::before`). Al pasar el cursor, la foto realiza un zoom suave detrás de la enredadera inmóvil, simulando ver los espacios a través de un ventanal cubierto de plantas reales.
+-   **Manteles de Picnic y Costuras (Servicios)**: Las tarjetas de servicios exhiben un **patrón de mantel cuadriculado (gingham)** verde y blanco creado con gradientes CSS puros. Los bordes de las tarjetas simulan **costuras de hilo hechas a mano** (`dashed border`), que cambian dinámicamente de verde musgo a terracota al hacer hover.
+-   **Cenefas Florales y Moños**: Cenefas de margaritas (en Historia) y moños blancos repetidos (en Servicios) recorren los límites horizontales de las secciones, rematando el diseño con un toque romántico y tradicional.
+
 ---
 
 ## 📊 Benchmarking — Análisis de Competencia
@@ -120,47 +129,56 @@ Busca un lugar **al aire libre**, estético y rodeado de naturaleza para celebra
 
 ## 🏗️ Arquitectura de la Información
 
-El sitio se organiza como una **Single Page Application (One-Page)** con 5 secciones principales accesibles desde un menú de navegación fijo (`position: fixed`):
+El sitio se organiza como una **Single Page Application (One-Page)** con 6 secciones principales accesibles desde un menú de navegación fijo (`position: fixed`) y varios componentes dinámicos e interactivos en primer plano:
 
 ```
-┌─────────────────────────────────────────────┐
-│  NAVBAR (fija)                              │
-│  Logo a la izquierda │ Enlaces a la derecha │
-│  Inicio · La Quinta · Servicios · Contacto  │
-├─────────────────────────────────────────────┤
-│                                             │
-│  HERO SECTION                               │
-│  Imagen de fondo + Frase inspiradora        │
-│  + Botón CTA → "Reservá tu fecha"           │
-│                                             │
-├─────────────────────────────────────────────┤
-│                                             │
-│  NUESTRA HISTORIA                           │
-│  Texto emotivo sobre la quinta              │
-│  Transmite calidez familiar                 │
-│                                             │
-├─────────────────────────────────────────────┤
-│                                             │
-│  LA QUINTA (Galería / Servicios)            │
-│  Grid de tarjetas con imágenes:             │
-│  Pileta · Parque · Quincho · Salón          │
-│  Jardín de Ceremonias · Estacionamiento     │
-│                                             │
-├─────────────────────────────────────────────┤
-│                                             │
-│  SERVICIOS                                  │
-│  Sonido/DJ · Catering · Decoración · Foto   │
-│                                             │
-├─────────────────────────────────────────────┤
-│                                             │
-│  FORMULARIO DE CONTACTO                     │
-│  Nombre · Email · Fecha · Tipo de Evento    │
-│  + Campos opcionales + Botón de envío       │
-│                                             │
-├─────────────────────────────────────────────┤
-│  FOOTER                                     │
-│  Datos de contacto · Enlaces · Redes        │
-└─────────────────────────────────────────────┘
+┌──────────────────────────────────────────────┐
+│  NAVBAR (fija)                               │
+│  Logo a la izquierda │ Enlaces a la derecha  │
+│  Inicio · La Quinta · Servicios · Contacto   │
+├──────────────────────────────────────────────┤
+│                                              │
+│  HERO SECTION (Inicio)                       │
+│  Imagen de fondo + Frase inspiradora         │
+│  + Botón CTA → "Reservá tu fecha"            │
+│                                              │
+├──────────────────────────────────────────────┤
+│                                              │
+│  NUESTRA HISTORIA                            │
+│  Texto emotivo + Cenefas de margaritas       │
+│                                              │
+├──────────────────────────────────────────────┤
+│                                              │
+│  LA QUINTA                                   │
+│  Tarjetas en arco + Enredaderas SVG + Zoom   │
+│  Pileta · Parque · Quincho · Salón           │
+│  Jardín de Ceremonias · Estacionamiento      │
+│                                              │
+├──────────────────────────────────────────────┤
+│                                              │
+│  SERVICIOS                                   │
+│  Tarjetas Gingham (Picnic) + Costuras dashed │
+│  Sonido/DJ · Catering · Decoración · Foto    │
+│  + Cenefas de moños blancos                  │
+│                                              │
+├──────────────────────────────────────────────┤
+│                                              │
+│  FORMULARIO DE CONTACTO                      │
+│  Campos de consulta + Validación nativa      │
+│  ===> Disparador del Modal de Éxito          │
+│                                              │
+├──────────────────────────────────────────────┤
+│                                              │
+│  HORARIOS Y UBICACIÓN (Visítanos)            │
+│  Tabla de horarios + Mapa de Google Maps     │
+│  + Botón de WhatsApp integrado (inline)      │
+│                                              │
+├──────────────────────────────────────────────┤
+│  FOOTER                                      │
+│  Datos de contacto · Enlaces · Redes         │
+└──────────────────────────────────────────────┘
+* [BOTÓN FLOTANTE WHATSAPP] (Visible en todo momento abajo a la derecha)
+* [MODAL DE FEEDBACK SIN JS] (Se activa al enviar el formulario válido)
 ```
 
 **Fundamento:** La estructura One-Page permite al usuario recorrer toda la información con un scroll natural, sin perder el contexto ni navegar entre múltiples páginas. El menú fijo permite saltar a cualquier sección en todo momento.
@@ -216,6 +234,11 @@ El texto oscuro (`#2F3E33`) sobre el fondo crema (`#FDFBF7`) cumple con las **no
 ### Respeto por preferencias del usuario
 - Se implementó la media query **`prefers-reduced-motion: reduce`** para desactivar todas las animaciones y transiciones si el usuario lo tiene configurado en su sistema operativo.
 
+### Modal de Confirmación y Elementos Flotantes Accesibles
+- **Estructura semántica**: El modal de éxito utiliza `role="dialog"`, `aria-labelledby="modal-titulo"` y `aria-describedby="modal-descripcion"` para anunciar correctamente su propósito y contenidos a lectores de pantalla.
+- **Acceso por teclado**: El botón "Aceptar" del modal es un enlace real que se enfoca mediante el flujo de tabulación.
+- **Etiquetas de voz**: El botón flotante de WhatsApp y el botón de cerrar del modal disponen de atributos `aria-label` descriptivos para que no se lean simplemente como iconos vacíos.
+
 ---
 
 ## 📝 Estructura del Formulario
@@ -232,7 +255,14 @@ Para cumplir con el requisito de **al menos 4 campos** y simular la funcionalida
 | 6 | Cantidad de Invitados | `type="number"` | ❌ No | Para dimensionar el espacio necesario |
 | 7 | Mensaje Adicional | `<textarea>` | ❌ No | Espacio libre para consultas o detalles del evento |
 
-**Botón de envío:** `type="submit"` que al hacer click emula el éxito del envío del formulario.
+**Botón de envío:** `type="submit"` que al hacer clic valida y envía los datos.
+
+### Sistema de Validación y Feedback (Sin JavaScript)
+Para cumplir con una experiencia de usuario interactiva sin recurrir a scripts o frameworks, se implementó el siguiente flujo nativo:
+1.  **Validación del lado del cliente**: Reactivada a través de las APIs nativas de HTML5 (atributos `required`, `type="email"`, etc.) al remover la clase de anulación `novalidate` en la etiqueta `<form>`. El navegador impide la sumisión y muestra globos de aviso si existen errores.
+2.  **Transición de Destino (`:target`)**: Una vez que el formulario es validado con éxito, se realiza la acción `action="#exito"` mediante el método `GET`.
+3.  **Modal Emergente**: El hash `#exito` en la URL activa la regla CSS `.modal-feedback:target`, la cual despliega un modal emergente animado con desenfoque de pantalla y diseño cottagecore.
+4.  **Cierre Lógico**: El botón "Aceptar" del modal redirige al usuario a `href="#contacto"`, lo que limpia el hash de la URL, ocultando el modal de inmediato y devolviendo el foco cómodamente al área de contacto.
 
 ---
 
