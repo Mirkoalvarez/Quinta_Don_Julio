@@ -1,0 +1,1370 @@
+/* ============================================
+   QUINTA DON JULIO — Cottagecore Theme
+   Archivo: css/styles.css
+   ============================================ */
+
+/* ---------- Google Fonts ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap');
+
+/* ============================================
+   CUSTOM PROPERTIES (Design Tokens)
+   ============================================ */
+:root {
+  /* --- Paleta principal --- */
+  --color-crema: #FDFBF7;
+  --color-crema-oscuro: #F5F0E8;
+  --color-verde-musgo: #4A5D4E;
+  --color-verde-oscuro: #2F3E33;
+  --color-verde-hover: #3B4D3F;
+  --color-terracota: #A3704C;
+  --color-terracota-claro: #C4956F;
+  --color-terracota-glow: rgba(163, 112, 76, 0.45);
+
+  /* --- Texto --- */
+  --text-primary: #2F3E33;
+  --text-secondary: #5A6B5E;
+  --text-light: #FDFBF7;
+
+  /* --- Tipografía --- */
+  --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body: 'Montserrat', 'Segoe UI', Roboto, sans-serif;
+
+  /* --- Bordes y sombras --- */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --shadow-card: 0 4px 16px rgba(47, 62, 51, 0.08);
+  --shadow-card-hover: 0 8px 32px rgba(47, 62, 51, 0.14);
+  --shadow-btn: 0 2px 8px rgba(74, 93, 78, 0.18);
+
+  /* --- Transiciones --- */
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  /* Compensa la navbar fija */
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--text-primary);
+  background-color: var(--color-crema);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   TIPOGRAFÍA
+   ============================================ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--color-verde-oscuro);
+  line-height: 1.25;
+}
+
+h1 {
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 800;
+}
+
+h2 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+h3 {
+  font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+p {
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.lead {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+/* Decoración debajo de los H2 de sección */
+main section>.container>h2.text-center::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-terracota), var(--color-terracota-claro));
+  margin: 0.75rem auto 0.5rem;
+  border-radius: 2px;
+}
+
+/* ============================================
+   SKIP LINK
+   ============================================ */
+.skip-link:focus {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  background-color: var(--color-verde-oscuro);
+  color: var(--text-light);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* ============================================
+   FOCUS GLOBAL — Accesibilidad con teclado
+   ============================================ */
+*:focus-visible {
+  outline: 3px solid var(--color-terracota);
+  outline-offset: 3px;
+  border-radius: 4px;
+  transition: outline-offset var(--transition-base);
+}
+
+/* ============================================
+   NAVBAR
+   ============================================ */
+.navbar {
+  background-color: rgba(253, 251, 247, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(74, 93, 78, 0.1);
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+  transition: background-color var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+.navbar.scrolled {
+  box-shadow: 0 2px 20px rgba(47, 62, 51, 0.1);
+}
+
+.navbar-brand {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--color-verde-oscuro) !important;
+  letter-spacing: 0.02em;
+  transition: color var(--transition-base);
+}
+
+.navbar-brand:hover,
+.navbar-brand:focus-visible {
+  color: var(--color-terracota) !important;
+}
+
+.navbar-nav .nav-link {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--color-verde-oscuro) !important;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem !important;
+  position: relative;
+  transition: color var(--transition-base);
+}
+
+.navbar-nav .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background-color: var(--color-terracota);
+  border-radius: 1px;
+  transition: width var(--transition-base);
+}
+
+.navbar-nav .nav-link:hover::after,
+.navbar-nav .nav-link.active::after {
+  width: 60%;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: var(--color-terracota) !important;
+}
+
+.navbar-toggler {
+  border: 2px solid var(--color-verde-musgo);
+  padding: 0.35rem 0.6rem;
+  border-radius: var(--radius-sm);
+}
+
+.navbar-toggler:focus-visible {
+  outline: 3px solid var(--color-terracota);
+  outline-offset: 3px;
+  box-shadow: none;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='%234A5D4E' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* ============================================
+   SECCIONES — Espaciado general
+   ============================================ */
+main section {
+  padding: 5rem 0;
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-crema-oscuro);
+  padding: 8rem 0 5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../img/heroimg1.png');
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+  transform: scale(1.1);
+  transition: transform 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  pointer-events: none;
+}
+
+.hero-section:hover .hero-bg {
+  transform: scale(1);
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(253, 251, 247, 0.85);
+  /* #FDFBF7 overlay with opacity */
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero-section .container {
+  position: relative;
+  z-index: 3;
+}
+
+/* Patrón decorativo sutil */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 320px;
+  height: 320px;
+  border: 2px solid rgba(163, 112, 76, 0.1);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.hero-section::after {
+  content: '';
+  position: absolute;
+  bottom: -40px;
+  left: -40px;
+  width: 240px;
+  height: 240px;
+  border: 2px solid rgba(74, 93, 78, 0.08);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.hero-section h1 {
+  color: var(--color-verde-oscuro);
+  margin-bottom: 1rem;
+  letter-spacing: 0.04em;
+  text-shadow:
+    0 1px 0 rgba(253, 251, 247, 0.8),
+    0 2px 4px rgba(47, 62, 51, 0.1),
+    0 4px 12px rgba(47, 62, 51, 0.06);
+  position: relative;
+  padding-bottom: 1.2rem;
+}
+
+/* Ornamento decorativo entre H1 y H2 */
+.hero-section h1::after {
+  content: '✾ ✾ ✾';
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.85rem;
+  letter-spacing: 0.6em;
+  color: var(--color-terracota);
+  opacity: 0.5;
+  font-family: serif;
+}
+
+.hero-subtitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1.3rem, 3vw, 1.9rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--color-terracota);
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.02em;
+  text-shadow:
+    0 1px 0 rgba(253, 251, 247, 0.9),
+    0 2px 6px rgba(163, 112, 76, 0.1);
+}
+
+.hero-section .lead {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  color: var(--text-secondary);
+}
+
+/* ============================================
+   BOTONES
+   ============================================ */
+.btn-primary {
+  background-color: var(--color-verde-musgo);
+  border-color: var(--color-verde-musgo);
+  color: var(--text-light);
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 0.75rem 2rem;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-btn);
+  transition: background-color var(--transition-base),
+    border-color var(--transition-base),
+    box-shadow var(--transition-base),
+    transform var(--transition-base);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-verde-hover);
+  border-color: var(--color-verde-hover);
+  box-shadow: 0 4px 16px rgba(74, 93, 78, 0.28);
+  transform: translateY(-2px);
+}
+
+.btn-primary:active {
+  background-color: var(--color-verde-oscuro);
+  border-color: var(--color-verde-oscuro);
+  transform: translateY(0);
+  box-shadow: var(--shadow-btn);
+}
+
+.btn-primary:focus-visible {
+  background-color: var(--color-verde-musgo);
+  border-color: var(--color-terracota);
+  outline: 3px solid var(--color-terracota);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px var(--color-terracota-glow);
+}
+
+/* ============================================
+   SECCIÓN NUESTRA HISTORIA
+   ============================================ */
+.section-historia {
+  background-color: var(--color-crema);
+  background-image:
+    linear-gradient(to bottom, rgba(253, 251, 247, 0.85), rgba(253, 251, 247, 0.85)),
+    url('../img/textura-lino.png');
+  background-size: auto, 400px 400px;
+  background-repeat: no-repeat, repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+/* SVG de margaritas — borde superior e inferior */
+.section-historia::before,
+.section-historia::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='40' viewBox='0 0 120 40'%3E%3C!-- Margarita 1 --%3E%3Cg transform='translate(30,20)'%3E%3Cellipse cx='0' cy='-8' rx='2.8' ry='7' fill='%23e8ddd0' transform='rotate(0)'/%3E%3Cellipse cx='0' cy='-8' rx='2.8' ry='7' fill='%23e8ddd0' transform='rotate(45)'/%3E%3Cellipse cx='0' cy='-8' rx='2.8' ry='7' fill='%23e8ddd0' transform='rotate(90)'/%3E%3Cellipse cx='0' cy='-8' rx='2.8' ry='7' fill='%23e8ddd0' transform='rotate(135)'/%3E%3Cellipse cx='0' cy='-8' rx='2.8' ry='7' fill='%23e8ddd0' transform='rotate(180)'/%3E%3Cellipse cx='0' cy='-8' rx='2.8' ry='7' fill='%23e8ddd0' transform='rotate(225)'/%3E%3Cellipse cx='0' cy='-8' rx='2.8' ry='7' fill='%23e8ddd0' transform='rotate(270)'/%3E%3Cellipse cx='0' cy='-8' rx='2.8' ry='7' fill='%23e8ddd0' transform='rotate(315)'/%3E%3Ccircle cx='0' cy='0' r='3.5' fill='%23A3704C'/%3E%3C/g%3E%3C!-- Margarita 2 (más pequeña, offset) --%3E%3Cg transform='translate(75,22)'%3E%3Cellipse cx='0' cy='-6' rx='2.2' ry='5.5' fill='%23efe6da' transform='rotate(0)'/%3E%3Cellipse cx='0' cy='-6' rx='2.2' ry='5.5' fill='%23efe6da' transform='rotate(51.4)'/%3E%3Cellipse cx='0' cy='-6' rx='2.2' ry='5.5' fill='%23efe6da' transform='rotate(102.8)'/%3E%3Cellipse cx='0' cy='-6' rx='2.2' ry='5.5' fill='%23efe6da' transform='rotate(154.3)'/%3E%3Cellipse cx='0' cy='-6' rx='2.2' ry='5.5' fill='%23efe6da' transform='rotate(205.7)'/%3E%3Cellipse cx='0' cy='-6' rx='2.2' ry='5.5' fill='%23efe6da' transform='rotate(257.1)'/%3E%3Cellipse cx='0' cy='-6' rx='2.2' ry='5.5' fill='%23efe6da' transform='rotate(308.6)'/%3E%3Ccircle cx='0' cy='0' r='2.8' fill='%23c4956f'/%3E%3C/g%3E%3C!-- Tallo decorativo --%3E%3Cline x1='30' y1='28' x2='30' y2='40' stroke='%234A5D4E' stroke-width='1' opacity='0.3'/%3E%3Cline x1='75' y1='29' x2='75' y2='40' stroke='%234A5D4E' stroke-width='1' opacity='0.25'/%3E%3C!-- Hojitas --%3E%3Cellipse cx='26' cy='34' rx='4' ry='1.8' fill='%234A5D4E' opacity='0.2' transform='rotate(-30,26,34)'/%3E%3Cellipse cx='34' cy='33' rx='3.5' ry='1.5' fill='%234A5D4E' opacity='0.15' transform='rotate(25,34,33)'/%3E%3Cellipse cx='79' cy='35' rx='3.5' ry='1.5' fill='%234A5D4E' opacity='0.18' transform='rotate(30,79,35)'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: 120px 40px;
+  background-position: center;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.section-historia::before {
+  position: absolute;
+  top: 8px;
+  left: 0;
+}
+
+.section-historia::after {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  transform: rotate(180deg);
+}
+
+.section-historia article {
+  font-size: 1.05rem;
+  line-height: 1.85;
+}
+
+.section-historia article p:first-of-type::first-letter {
+  font-family: var(--font-heading);
+  font-size: 3.2rem;
+  font-weight: 700;
+  float: left;
+  line-height: 1;
+  margin-right: 0.5rem;
+  margin-top: 0.1rem;
+  color: var(--color-terracota);
+}
+
+/* ============================================
+   SECCIÓN LA QUINTA
+   ============================================ */
+.section-quinta {
+  background-color: var(--color-crema-oscuro);
+  background-image:
+    linear-gradient(to bottom, rgba(245, 240, 232, 0.55), rgba(245, 240, 232, 0.55)),
+    url('../img/textura-lino.png');
+  background-size: auto, 400px 400px;
+  background-repeat: no-repeat, repeat;
+}
+
+/* Tarjetas de La Quinta (Estilo Arcos Simétricos con Enredadera) */
+.section-quinta .card {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  overflow: hidden;
+  transform: none !important;
+  transition: transform var(--transition-base);
+  position: relative;
+}
+
+.section-quinta .card:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
+.section-quinta .card-img-top {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  transition: transform var(--transition-slow), filter var(--transition-slow);
+}
+
+.section-quinta .card:hover .card-img-top {
+  transform: scale(1.06);
+  filter: brightness(1.02);
+}
+
+.section-quinta .card-body {
+  padding: 1.25rem 0.5rem 0.5rem 0.5rem;
+  text-align: center;
+}
+
+.section-quinta .card-title {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-verde-oscuro);
+  margin-bottom: 0.5rem;
+}
+
+.section-quinta .card-text {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Todos los arcos son simétricos */
+.section-quinta .card,
+.section-quinta .card-img-top {
+  border-radius: 120px 120px 0 0;
+}
+
+/* Detalle de Enredadera Trepadora (Climbing Vine) */
+.section-quinta .card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 100 125' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M 6,125 V 50 A 44,44 0 0,1 94,50 V 125' stroke='%234A5D4E' stroke-width='1.8' stroke-linecap='round'/><path d='M 6,110 C -2,110 -4,100 4,103 C 12,100 14,110 6,110 Z' fill='%234A5D4E'/><path d='M 6,80 C 14,80 16,70 8,73 C 0,70 2,80 6,80 Z' fill='%234A5D4E'/><path d='M 12,52 C 6,48 5,58 13,60 C 21,58 18,48 12,52 Z' fill='%234A5D4E'/><path d='M 24,30 C 18,24 16,34 24,37 C 32,34 30,24 24,30 Z' fill='%234A5D4E'/><path d='M 40,16 C 36,10 32,18 38,22 C 44,18 44,10 40,16 Z' fill='%234A5D4E'/><path d='M 50,7 C 46,14 42,16 50,21 C 58,16 54,14 50,7 Z' fill='%234A5D4E'/><path d='M 60,16 C 64,10 68,18 62,22 C 56,18 56,10 60,16 Z' fill='%234A5D4E'/><path d='M 76,30 C 82,24 84,34 76,37 C 68,34 70,24 76,30 Z' fill='%234A5D4E'/><path d='M 88,52 C 94,48 95,58 87,60 C 79,58 82,48 88,52 Z' fill='%234A5D4E'/><path d='M 94,80 C 86,80 84,70 92,73 C 100,70 98,80 94,80 Z' fill='%234A5D4E'/><path d='M 94,110 C 102,110 104,100 96,103 C 88,100 86,110 94,110 Z' fill='%234A5D4E'/></svg>");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 3;
+  filter: drop-shadow(0 2px 4px rgba(47, 62, 51, 0.15));
+}
+
+
+/* ============================================
+   SECCIÓN SERVICIOS
+   ============================================ */
+.section-servicios {
+  background-color: var(--color-crema);
+  background-image:
+    linear-gradient(to bottom, rgba(253, 251, 247, 0.75), rgba(253, 251, 247, 0.75)),
+    url('../img/textura-lino.png');
+  background-size: auto, 400px 400px;
+  background-repeat: no-repeat, repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Borde decorativo de moños repetidos */
+.section-servicios::before,
+.section-servicios::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='40' viewBox='0 0 60 40'%3E%3Cg fill='%23FFFFFF' stroke='%234A5D4E' stroke-width='0.8' stroke-opacity='0.4' stroke-linejoin='round'%3E%3Cpath d='M 28,20 C 20,10 10,12 14,20 C 10,28 20,30 28,20 Z'/%3E%3Cpath d='M 32,20 C 40,10 50,12 46,20 C 50,28 40,30 32,20 Z'/%3E%3Cpath d='M 28,22 C 25,29 20,34 16,36 C 20,34 26,30 29,22 Z'/%3E%3Cpath d='M 32,22 C 35,29 40,34 44,36 C 40,34 34,30 31,22 Z'/%3E%3Crect x='28' y='17' width='4' height='6' rx='1.5' fill='%23FFFFFF'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: 60px 40px;
+  background-position: center;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.section-servicios::before {
+  position: absolute;
+  top: 8px;
+  left: 0;
+}
+
+.section-servicios::after {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  transform: rotate(180deg);
+}
+
+.section-servicios .card .bi {
+  color: var(--color-verde-musgo);
+  transition: color var(--transition-base),
+    transform var(--transition-base);
+}
+
+.section-servicios .card:hover .bi {
+  color: var(--color-terracota);
+  transform: scale(1.15);
+}
+
+.section-servicios .card {
+  background-color: var(--color-crema);
+  background-image:
+    linear-gradient(90deg, rgba(74, 93, 78, 0.06) 50%, transparent 50%),
+    linear-gradient(rgba(74, 93, 78, 0.06) 50%, transparent 50%);
+  background-size: 24px 24px;
+  border: 2px dashed rgba(74, 93, 78, 0.25);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-base),
+    box-shadow var(--transition-base),
+    border-color var(--transition-base);
+}
+
+.section-servicios .card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--color-terracota);
+}
+
+
+/* ============================================
+   TARJETAS (Cards)
+   ============================================ */
+.card {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(74, 93, 78, 0.1);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-base),
+    box-shadow var(--transition-base),
+    border-color var(--transition-base);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: rgba(163, 112, 76, 0.25);
+}
+
+.card:focus-within {
+  outline: 3px solid var(--color-terracota);
+  outline-offset: 2px;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  transition: transform var(--transition-slow),
+    filter var(--transition-slow);
+}
+
+.card:hover .card-img-top {
+  transform: scale(1.05);
+  filter: brightness(1.05);
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-title {
+  color: var(--color-verde-oscuro);
+  margin-bottom: 0.6rem;
+}
+
+.card-text {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+/* ============================================
+   SECCIÓN CONTACTO
+   ============================================ */
+.section-contacto {
+  background-color: var(--color-crema-oscuro);
+  background-image:
+    linear-gradient(to bottom, rgba(245, 240, 232, 0.55), rgba(245, 240, 232, 0.55)),
+    url('../img/textura-lino.png');
+  background-size: auto, 400px 400px;
+  background-repeat: no-repeat, repeat;
+}
+
+/* ============================================
+   FORMULARIO
+   ============================================ */
+.form-label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--color-verde-oscuro);
+  margin-bottom: 0.4rem;
+}
+
+.form-control,
+.form-select {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  background-color: #FFFFFF;
+  border: 2px solid rgba(74, 93, 78, 0.2);
+  border-radius: var(--radius-sm);
+  padding: 0.7rem 1rem;
+  transition: border-color var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+.form-control::placeholder,
+.form-select::placeholder {
+  color: #999;
+}
+
+.form-control:hover,
+.form-select:hover {
+  border-color: rgba(74, 93, 78, 0.4);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--color-terracota);
+  box-shadow: 0 0 0 4px var(--color-terracota-glow);
+  outline: none;
+}
+
+.form-control:focus-visible,
+.form-select:focus-visible {
+  border-color: var(--color-terracota);
+  outline: 3px solid var(--color-terracota);
+  outline-offset: 1px;
+  box-shadow: 0 0 0 6px var(--color-terracota-glow);
+}
+
+.form-text {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.invalid-feedback {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* ============================================
+   SECCIÓN VISITANOS — Horarios y Ubicación
+   ============================================ */
+.section-visitanos {
+  background-color: var(--color-verde-oscuro);
+  color: var(--color-crema);
+  padding: 5rem 0;
+}
+
+/* Overline (subtítulo pequeño encima del H2) */
+.section-overline {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-terracota-claro);
+  margin-bottom: 0.6rem;
+}
+
+.section-overline::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background-color: var(--color-terracota);
+  margin-top: 0.5rem;
+  border-radius: 1px;
+}
+
+.section-visitanos h2 {
+  font-family: var(--font-heading);
+  color: var(--color-crema);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  margin-bottom: 1rem;
+}
+
+.section-visitanos h2::after {
+  display: none;
+}
+
+.section-visitanos p {
+  color: rgba(253, 251, 247, 0.75);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* Tabla de horarios */
+.table-horarios {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  --bs-table-bg: transparent;
+  --bs-table-color: rgba(253, 251, 247, 0.85);
+  --bs-table-border-color: rgba(253, 251, 247, 0.1);
+  --bs-table-striped-bg: transparent;
+  --bs-table-hover-bg: transparent;
+  background-color: transparent !important;
+  color: rgba(253, 251, 247, 0.85);
+}
+
+.table-horarios td {
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(253, 251, 247, 0.1);
+  color: rgba(253, 251, 247, 0.85);
+  background-color: transparent !important;
+  font-size: 0.95rem;
+  vertical-align: middle;
+}
+
+.table-horarios tr:last-child td {
+  border-bottom: none;
+}
+
+.table-horarios td:first-child {
+  font-weight: 600;
+  color: var(--color-crema);
+}
+
+.table-horarios td:last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Filas con horario extendido */
+.horario-extendido td:first-child {
+  color: var(--color-terracota-claro);
+}
+
+.horario-extendido td:last-child {
+  color: var(--color-terracota-claro);
+}
+
+.badge-extendido {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-verde-oscuro);
+  background-color: var(--color-terracota-claro);
+  border-radius: 50%;
+  margin-left: 0.4rem;
+  line-height: 1;
+}
+
+/* Nota al pie de horarios */
+.nota-horarios {
+  margin-top: 0.5rem;
+}
+
+.nota-horarios small {
+  color: rgba(253, 251, 247, 0.5);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.nota-horarios .bi {
+  margin-right: 0.3rem;
+}
+
+/* Columna de ubicación */
+.ubicacion-titulo {
+  font-family: var(--font-heading);
+  font-style: italic;
+  color: var(--color-crema);
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  margin-bottom: 0.75rem;
+}
+
+.ubicacion-direccion {
+  font-style: normal;
+}
+
+.ubicacion-direccion p {
+  color: rgba(253, 251, 247, 0.75);
+  font-size: 0.95rem;
+  margin-bottom: 1.25rem;
+}
+
+.ubicacion-direccion .bi {
+  color: var(--color-terracota-claro);
+  margin-right: 0.3rem;
+}
+
+/* Contenedor del mapa */
+.mapa-container {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.mapa-container iframe {
+  display: block;
+}
+
+/* Botón de WhatsApp */
+.btn-whatsapp {
+  background-color: #25D366;
+  border-color: #25D366;
+  color: #FFFFFF;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.9rem 2rem;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
+  transition: background-color var(--transition-base),
+    box-shadow var(--transition-base),
+    transform var(--transition-base);
+}
+
+.btn-whatsapp:hover {
+  background-color: #1EBE5A;
+  border-color: #1EBE5A;
+  color: #FFFFFF;
+  box-shadow: 0 6px 22px rgba(37, 211, 102, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-whatsapp:active {
+  background-color: #1AA34D;
+  transform: translateY(0);
+}
+
+.btn-whatsapp:focus-visible {
+  outline: 3px solid var(--color-terracota);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px var(--color-terracota-glow);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.site-footer {
+  background-color: var(--color-verde-oscuro);
+  color: var(--color-crema);
+  padding: 3.5rem 0 1.5rem;
+}
+
+.site-footer h4 {
+  font-family: var(--font-heading);
+  color: var(--color-crema);
+  font-size: 1.15rem;
+  margin-bottom: 1rem;
+  position: relative;
+  padding-bottom: 0.6rem;
+}
+
+.site-footer h4::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 35px;
+  height: 2px;
+  background-color: var(--color-terracota);
+  border-radius: 1px;
+}
+
+.site-footer address {
+  font-style: normal;
+}
+
+.site-footer p,
+.site-footer address p {
+  color: rgba(253, 251, 247, 0.8);
+  font-size: 0.92rem;
+  margin-bottom: 0.5rem;
+}
+
+.site-footer a {
+  color: var(--color-terracota-claro);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+.site-footer a:hover {
+  color: var(--color-crema);
+  text-decoration: underline;
+}
+
+.site-footer a:focus-visible {
+  outline: 3px solid var(--color-terracota);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+.site-footer .list-unstyled li {
+  margin-bottom: 0.4rem;
+}
+
+.site-footer .list-inline-item a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: rgba(253, 251, 247, 0.08);
+  transition: background-color var(--transition-base),
+    transform var(--transition-base);
+}
+
+.site-footer .list-inline-item a:hover {
+  background-color: var(--color-terracota);
+  transform: translateY(-3px);
+  text-decoration: none;
+}
+
+.site-footer .list-inline-item a .bi {
+  color: var(--color-crema);
+}
+
+.site-footer hr {
+  border-color: rgba(253, 251, 247, 0.12);
+  margin: 2rem 0 1rem;
+}
+
+.site-footer small {
+  color: rgba(253, 251, 247, 0.55);
+  font-size: 0.85rem;
+}
+
+/* ============================================
+   ANIMACIONES DE ENTRADA (Scroll)
+   ============================================ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Clase utilitaria para animar al entrar en viewport (requiere JS) */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   PREFERS-REDUCED-MOTION
+   Respeta la preferencia del usuario
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+
+  .card:hover .card-img-top {
+    transform: none;
+  }
+
+  .btn-primary:hover {
+    transform: none;
+  }
+
+  .site-footer .list-inline-item a:hover {
+    transform: none;
+  }
+
+  .section-servicios .card:hover .bi {
+    transform: none;
+  }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+/* ----- Tablets y pantallas medianas ----- */
+@media (max-width: 991.98px) {
+  main section {
+    padding: 3.5rem 0;
+  }
+
+  .hero-section {
+    min-height: 80vh;
+    padding: 6rem 1rem 3rem;
+  }
+
+  .navbar-collapse {
+    background-color: var(--color-crema);
+    padding: 1rem;
+    margin-top: 0.5rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(74, 93, 78, 0.1);
+  }
+
+  .navbar-nav .nav-link {
+    padding: 0.6rem 1rem !important;
+    border-bottom: 1px solid rgba(74, 93, 78, 0.06);
+  }
+
+  .navbar-nav .nav-link:last-child {
+    border-bottom: none;
+  }
+
+  .navbar-nav .nav-link::after {
+    display: none;
+  }
+}
+
+/* ----- Móviles ----- */
+@media (max-width: 575.98px) {
+  main section {
+    padding: 3rem 0;
+  }
+
+  .hero-section {
+    min-height: 75vh;
+    padding: 5.5rem 1rem 2.5rem;
+  }
+
+  .hero-section .lead {
+    font-size: 1.05rem;
+  }
+
+  .hero-section::before,
+  .hero-section::after {
+    display: none;
+  }
+
+  .card-img-top {
+    height: 180px;
+  }
+
+  .card-body {
+    padding: 1.2rem;
+  }
+
+  .section-historia article p:first-of-type::first-letter {
+    font-size: 2.6rem;
+  }
+
+  .site-footer {
+    text-align: center;
+  }
+
+  .site-footer h4::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .btn-lg {
+    padding: 0.65rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .section-visitanos {
+    text-align: center;
+  }
+
+  .section-overline::after {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .table-horarios td:first-child {
+    text-align: left;
+  }
+
+  .mapa-container iframe {
+    height: 220px;
+  }
+}
+
+/* ----- Pantallas grandes ----- */
+@media (min-width: 1400px) {
+  .card-img-top {
+    height: 260px;
+  }
+}
+
+/* ============================================
+   MODAL DE FEEDBACK (SIN JS)
+   ============================================ */
+.modal-feedback {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(47, 62, 51, 0.6); /* Verde oscuro traslúcido */
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Se muestra cuando el ID 'exito' es el target de la URL */
+.modal-feedback:target {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-feedback-content {
+  background-color: var(--color-crema);
+  background-image:
+    linear-gradient(to bottom, rgba(253, 251, 247, 0.95), rgba(253, 251, 247, 0.95)),
+    url('../img/textura-lino.png');
+  background-size: auto, 400px 400px;
+  background-repeat: no-repeat, repeat;
+  border: 2px dashed rgba(74, 93, 78, 0.3); /* Costura cottagecore */
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(47, 62, 51, 0.2);
+  position: relative;
+  transform: scale(0.85);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-feedback:target .modal-feedback-content {
+  transform: scale(1);
+}
+
+.modal-feedback-icon {
+  width: 70px;
+  height: 70px;
+  background-color: var(--color-crema-oscuro);
+  border: 1px solid rgba(74, 93, 78, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+}
+
+.modal-feedback-icon i {
+  color: var(--color-verde-musgo);
+  font-size: 2.2rem;
+}
+
+.modal-feedback-title {
+  font-family: var(--font-heading);
+  color: var(--color-verde-oscuro);
+  font-size: 1.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.modal-feedback-text {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.8rem;
+}
+
+.modal-feedback-btn {
+  background-color: var(--color-verde-musgo);
+  color: var(--text-light);
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color var(--transition-base), transform var(--transition-base);
+}
+
+.modal-feedback-btn:hover {
+  background-color: var(--color-verde-hover);
+  color: var(--text-light);
+  transform: translateY(-2px);
+}
+
+/* ============================================
+   BOTÓN FLOTANTE DE WHATSAPP
+   ============================================ */
+.whatsapp-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 60px;
+  height: 60px;
+  background-color: #25D366;
+  color: #FFFFFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
+  z-index: 1900;
+  text-decoration: none;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              background-color 0.3s ease, 
+              box-shadow 0.3s ease;
+}
+
+.whatsapp-float:hover {
+  background-color: #1EBE5A;
+  color: #FFFFFF;
+  transform: scale(1.1) translateY(-3px);
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.5);
+}
+
+.whatsapp-float:active {
+  transform: scale(0.95);
+}
+
+.whatsapp-float:focus-visible {
+  outline: 3px solid var(--color-terracota);
+  outline-offset: 3px;
+}
+
+/* Ajustes responsivos para pantallas muy pequeñas */
+@media (max-width: 575.98px) {
+  .whatsapp-float {
+    bottom: 16px;
+    right: 16px;
+    width: 50px;
+    height: 50px;
+    font-size: 26px;
+  }
+}
