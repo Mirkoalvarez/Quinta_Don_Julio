@@ -20,6 +20,7 @@ El proyecto fue construido sin frameworks de JavaScript (React, Vue, Angular), p
 - [Leyes de UX Aplicadas](#-leyes-de-ux-aplicadas)
 - [Accesibilidad Web](#-accesibilidad-web-wcag)
 - [Estructura del Formulario](#-estructura-del-formulario)
+- [Optimización SEO y Metadatos](#-optimización-seo-y-metadatos)
 - [Tecnologías Utilizadas](#-tecnologías-utilizadas)
 - [Estructura de Archivos](#-estructura-de-archivos)
 
@@ -266,6 +267,21 @@ Para cumplir con una experiencia de usuario interactiva sin recurrir a scripts o
 
 ---
 
+## 🔍 Optimización SEO y Metadatos
+
+Para asegurar que el sitio se indexe correctamente en buscadores y brinde una previsualización atractiva al compartirse en redes sociales y servicios de mensajería (WhatsApp, Facebook, Telegram, X), se implementaron las siguientes mejoras en la cabecera del HTML:
+
+-   **Favicon en Línea (🐎)**: Para evitar peticiones HTTP y acelerar la carga del sitio, se implementó un favicon SVG nativo en línea (`data:image/svg+xml`) que renderiza el emoji del caballo, haciendo alusión al entorno rural y natural de la quinta.
+-   **Etiquetas Meta de SEO**:
+    *   `keywords`: Términos de búsqueda clave curados sobre alquiler de quintas y organización de eventos en Buenos Aires.
+    *   `robots`: Configurado en `index, follow` para permitir que los buscadores indexen e inspeccionen todo el sitio.
+    *   `author`: Definido como "Quinta Don Julio".
+-   **Etiqueta Canonical**: `<link rel="canonical" href="...">` para evitar la penalización por contenido duplicado si se accede con o sin `www`, o por diferentes protocolos.
+-   **Protocolo Open Graph (OG)**: Metadatos para plataformas sociales (`og:title`, `og:description`, `og:image`, `og:url`, `og:locale`) que aseguran que al compartir el link se cree una tarjeta enriquecida con la imagen de la quinta y descripción clara de los servicios.
+-   **Twitter Cards**: Configuración de `summary_large_image` para lograr una previsualización expandida de alta calidad en la red social X (Twitter).
+
+---
+
 ## 🛠️ Tecnologías Utilizadas
 
 | Tecnología | Versión | Uso |
@@ -289,12 +305,16 @@ Quinta_Don_Julio/
 ├── css/
 │   └── styles.css          # Estilos personalizados (tema Cottagecore)
 └── img/
-    ├── pileta.png           # Imagen de la pileta
-    ├── parque.png           # Imagen del parque
-    ├── quincho.png          # Imagen del quincho
-    ├── salon.png            # Imagen del salón interior
+    ├── pileta.png            # Imagen de la pileta
+    ├── parque.png            # Imagen del parque
+    ├── quincho.png           # Imagen del quincho
+    ├── salon.png             # Imagen del salón interior
     ├── jardin-ceremonias.png # Imagen del jardín de ceremonias
-    └── estacionamiento.png  # Imagen del estacionamiento
+    ├── estacionamiento.png   # Imagen del estacionamiento
+    ├── heroimg.png           # Imagen de fondo alternativa del hero
+    ├── heroimg1.png          # Imagen de fondo alternativa adicional del hero
+    ├── textura-lino.png      # Textura de lino de fondo (estilo cottagecore)
+    └── textura-cuero.png     # Textura de cuero (asset disponible para otros estilos)
 ```
 
 ---
