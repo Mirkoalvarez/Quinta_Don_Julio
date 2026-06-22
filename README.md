@@ -290,9 +290,9 @@ Para asegurar que el sitio se indexe correctamente en buscadores y brinde una pr
 | **CSS3** | — | Estilos personalizados, animaciones, responsive design |
 | **Bootstrap** | 5.3.3 | Sistema de grillas, componentes base (navbar, cards, forms) |
 | **Bootstrap Icons** | 1.11.3 | Iconografía (redes sociales, servicios, formulario) |
-| **Google Fonts** | — | Playfair Display (títulos) + Montserrat (cuerpo) |
+| **Fuentes Locales** | — | Montserrat (cuerpo) y Playfair Display (títulos) autohospedadas |
 
-> **Nota:** No se utilizan frameworks de JavaScript (React, Vue, Angular). El sitio funciona exclusivamente con HTML, CSS y el JS mínimo de Bootstrap para el menú responsive.
+> **Nota:** Para posibilitar el **funcionamiento offline estricto y autónomo**, todas las dependencias del sitio se sirven de manera local. Las librerías de **Bootstrap** y **Bootstrap Icons** (con sus iconos vectoriales), así como las tipografías de **Google Fonts** (Montserrat y Playfair Display), se han descargado e integrado directamente en el proyecto, evitando cualquier petición HTTP externa o el uso de CDNs. Además, la sección de ubicación utiliza una imagen estática local que sirve de enlace a Google Maps, garantizando una visualización correcta sin requerir conexión activa a internet.
 
 ---
 
@@ -302,8 +302,19 @@ Para asegurar que el sitio se indexe correctamente en buscadores y brinde una pr
 Quinta_Don_Julio/
 ├── index.html              # Página principal (One-Page)
 ├── README.md               # Documentación del proyecto
+├── package.json            # Registro de dependencias de npm (Bootstrap, Icons)
 ├── css/
-│   └── styles.css          # Estilos personalizados (tema Cottagecore)
+│   ├── bootstrap.min.css   # Framework CSS de Bootstrap (local)
+│   ├── bootstrap-icons.min.css # Estilos de iconografía (local)
+│   ├── fonts.css           # Estilos de fuentes tipográficas autohospedadas (local)
+│   ├── styles.css          # Estilos personalizados (tema Cottagecore)
+│   └── fonts/
+│       ├── bootstrap-icons.woff   # Fuente de iconos de Bootstrap (local)
+│       └── bootstrap-icons.woff2  # Fuente de iconos de Bootstrap (local)
+│       ├── montserrat-*           # Archivos de fuentes Montserrat (.woff2 locales)
+│       └── playfair-display-*     # Archivos de fuentes Playfair Display (.woff2 locales)
+├── js/
+│   └── bootstrap.bundle.min.js # Scripts de Bootstrap (local)
 └── img/
     ├── pileta.png            # Imagen de la pileta
     ├── parque.png            # Imagen del parque
@@ -314,7 +325,8 @@ Quinta_Don_Julio/
     ├── heroimg.png           # Imagen de fondo alternativa del hero
     ├── heroimg1.png          # Imagen de fondo alternativa adicional del hero
     ├── textura-lino.png      # Textura de lino de fondo (estilo cottagecore)
-    └── textura-cuero.png     # Textura de cuero (asset disponible para otros estilos)
+    ├── textura-cuero.png     # Textura de cuero (asset disponible para otros estilos)
+    └── mapa-ubicacion.png    # Mapa estático representativo y linkeable (local offline)
 ```
 
 ---

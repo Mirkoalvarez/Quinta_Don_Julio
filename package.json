@@ -1,0 +1,25 @@
+{
+  "name": "quinta_don_julio",
+  "version": "1.0.0",
+  "description": "> *\"Tu evento soñado empieza aquí.\"*",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mirkoalvarez/Quinta_Don_Julio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Mirkoalvarez/Quinta_Don_Julio/issues"
+  },
+  "homepage": "https://github.com/Mirkoalvarez/Quinta_Don_Julio#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3"
+  }
+}

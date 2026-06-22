@@ -3,8 +3,7 @@
    Archivo: css/styles.css
    ============================================ */
 
-/* ---------- Google Fonts ---------- */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap');
+/* Las fuentes de Google Fonts (Montserrat y Playfair Display) se cargan de forma local desde css/fonts.css */
 
 /* ============================================
    CUSTOM PROPERTIES (Design Tokens)
@@ -907,8 +906,21 @@ main section {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
 
-.mapa-container iframe {
+.mapa-container a {
   display: block;
+  overflow: hidden;
+}
+
+.mapa-container img.mapa-imagen {
+  display: block;
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.mapa-container a:hover img.mapa-imagen {
+  transform: scale(1.05);
 }
 
 /* Botón de WhatsApp */
@@ -1207,7 +1219,7 @@ main section {
     text-align: left;
   }
 
-  .mapa-container iframe {
+  .mapa-container img.mapa-imagen {
     height: 220px;
   }
 }
