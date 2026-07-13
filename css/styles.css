@@ -1380,3 +1380,75 @@ main section {
     font-size: 26px;
   }
 }
+
+/* ============================================
+   CURSOR SUAVE PERSONALIZADO (Estilo Magic UI)
+   ============================================ */
+
+/* Ocultar el cursor estándar solo si JavaScript ha inicializado con éxito */
+@media (any-hover: hover) and (any-pointer: fine) {
+  .custom-cursor-enabled,
+  .custom-cursor-enabled * {
+    cursor: none !important;
+  }
+
+  /* Mantener el cursor de texto nativo para formularios por accesibilidad */
+  .custom-cursor-enabled input,
+  .custom-cursor-enabled textarea,
+  .custom-cursor-enabled select,
+  .custom-cursor-enabled [contenteditable] {
+    cursor: text !important;
+  }
+  
+  /* Mantener cursor tipo pointer para iframes e interactivos especiales */
+  .custom-cursor-enabled iframe,
+  .custom-cursor-enabled .mapa-container a {
+    cursor: pointer !important;
+  }
+}
+
+/* Contenedor del cursor personalizado */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 54px;
+  pointer-events: none;
+  z-index: 99999;
+  transform-origin: center center;
+  transform: translate3d(0, 0, 0) translate(-50%, -50%) scale(0);
+  opacity: 0;
+  will-change: transform, opacity;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  visibility: hidden;
+  display: none;
+}
+
+@media (any-hover: hover) and (any-pointer: fine) {
+  .custom-cursor-enabled .custom-cursor {
+    display: block;
+  }
+}
+
+/* Visibilidad del cursor cuando se está moviendo */
+.custom-cursor.custom-cursor-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Ocultar el cursor cuando se pasa sobre inputs de texto */
+.custom-cursor.custom-cursor-hidden {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* Transiciones de color del SVG en hover */
+.custom-cursor svg path {
+  transition: fill 0.25s ease, stroke 0.25s ease;
+}
+
+.custom-cursor.custom-cursor-hover svg path[fill="#4A5D4E"] {
+  fill: var(--color-terracota) !important; /* Cambia a Terracota sobre enlaces */
+}

@@ -291,8 +291,9 @@ Para asegurar que el sitio se indexe correctamente en buscadores y brinde una pr
 | **Bootstrap** | 5.3.3 | Sistema de grillas, componentes base (navbar, cards, forms) |
 | **Bootstrap Icons** | 1.11.3 | Iconografía (redes sociales, servicios, formulario) |
 | **Fuentes Locales** | — | Montserrat (cuerpo) y Playfair Display (títulos) autohospedadas |
+| **JavaScript Vanilla** | — | Animaciones y físicas de resorte para el cursor suave (local) |
 
-> **Nota:** Para posibilitar el **funcionamiento offline estricto y autónomo**, todas las dependencias del sitio se sirven de manera local. Las librerías de **Bootstrap** y **Bootstrap Icons** (con sus iconos vectoriales), así como las tipografías de **Google Fonts** (Montserrat y Playfair Display), se han descargado e integrado directamente en el proyecto, evitando cualquier petición HTTP externa o el uso de CDNs. Además, la sección de ubicación utiliza una imagen estática local que sirve de enlace a Google Maps, garantizando una visualización correcta sin requerir conexión activa a internet.
+> **Nota:** Para posibilitar el **funcionamiento offline estricto y autónomo**, todas las dependencias del sitio se sirven de manera local. Las librerías de **Bootstrap** y **Bootstrap Icons** (con sus iconos vectoriales), las tipografías de **Google Fonts** (Montserrat y Playfair Display), y el script del **Smooth Cursor** se han integrado directamente en el proyecto, evitando cualquier petición HTTP externa o el uso de CDNs. Además, la sección de ubicación utiliza una imagen estática local que sirve de enlace a Google Maps, garantizando una visualización correcta sin requerir conexión activa a internet.
 
 ---
 
@@ -314,7 +315,8 @@ Quinta_Don_Julio/
 │       ├── montserrat-*           # Archivos de fuentes Montserrat (.woff2 locales)
 │       └── playfair-display-*     # Archivos de fuentes Playfair Display (.woff2 locales)
 ├── js/
-│   └── bootstrap.bundle.min.js # Scripts de Bootstrap (local)
+│   ├── bootstrap.bundle.min.js # Scripts de Bootstrap (local)
+│   └── smooth-cursor.js        # Script de cursor suave con físicas de resorte (local)
 └── img/
     ├── pileta.png            # Imagen de la pileta
     ├── parque.png            # Imagen del parque
